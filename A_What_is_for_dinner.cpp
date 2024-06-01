@@ -1,96 +1,36 @@
-#include <bits/stdc++.h>
-using namespace std;
+#Python equivalent of the modified C++ code
 
-#define fastio()                      \
-    ios_base::sync_with_stdio(false); \
-    cin.tie(NULL);                    \
-    cout.tie(NULL)
-#define int long long
-#define pb push_back
-#define ppb pop_back
-#define ff first
-#define ss second
-#define ll long long
-#define all(x) (x).begin(), (x).end()
-#define sz(x) ((int)(x).size())
-#define MOD 1000000007
-#define PI 3.141592653589793238462
-#define INF 1e18
-#define endl "\n"
+tscttt = int(input())
 
-/*---------------------------------------------------------------------------------------------------------------------------*/
-vector<ll> sieve(int n)
-{
-    int *arr = new int[n + 1]();
-    vector<ll> vect;
-    for (int i = 2; i <= n; i++)
-        if (arr[i] == 0)
-        {
-            vect.push_back(i);
-            for (int j = 2 * i; j <= n; j += i)
-                arr[j] = 1;
-        }
-    return vect;
-}
-ll gcd(ll a, ll b)
-{
-    if (b > a)
-    {
-        return gcd(b, a);
-    }
-    if (b == 0)
-    {
-        return a;
-    }
-    return gcd(b, a % b);
-}
-ll mod_mul(ll a, ll b, ll m)
-{
-    a = a % m;
-    b = b % m;
-    return (((a * b) % m) + m) % m;
-}
-ll expo(ll a, ll b, ll mod)
-{
-    ll res = 1;
-    while (b > 0)
-    {
-        if (b & 1)
-            res = (res * a) % mod;
-        a = (a * a) % mod;
-        b = b >> 1;
-    }
-    return res;
-}
-/*--------------------------------------------------------------------------------------------------------------------------*/
+for _ in range(tscttt):
+    m = int(input())
+    c = list(map(int, input().split()))
 
-// for(int i=1;i<v.size();i++) cout << v[i] << endl;
+    loooo = []
+    its_stack = []
+    resltttttt = 0
 
-void solve()
-{
-   int n,m,k;
-   cin>>n>>m>>k;
-   vector<ll>mini(m+1,INT_MAX);
-   for(int i=0;i<n;i++)
-   {
-    int a,b;
-    cin>>a>>b;
-    mini[a]=min(mini[a],b);
-   }
-   int ans=0;
-   for(int i=1;i<=m;i++)
-   {
-    ans+=mini[i];
-   }
-   cout << min(ans,k) << endl;
-}
+    for tscttt in range(m):
+        while len(loooo) > 1 and loooo[-1] > c[tscttt]:
+            c1 = loooo.pop()
+            if c1 >= loooo[-1]:
+                its_stack.pop()
+            else:
+                loooo.append(c1)
+                break
+        loooo.append(c[tscttt])
+        its_stack.append(tscttt)
 
-int32_t main()
-{
-    fastio();
+    lttttt = loooo[-1]
+    loooo.pop()
+    koooo = its_stack[-1]
+    its_stack.pop()
 
-    int t=1;
-    // cin >> t;
-    while (t--)
-        solve();
-}
+    while loooo:
+        resltttttt += max(lttttt, loooo[-1]) * (koooo - its_stack[-1])
+        lttttt = loooo[-1]
+        loooo.pop()
+        koooo = its_stack[-1]
+        its_stack.pop()
+
+    print(resltttttt)

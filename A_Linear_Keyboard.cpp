@@ -68,71 +68,33 @@ ll expo(ll a, ll b, ll mod)
 
 void solve()
 {
-    ll n, q;
-    cin >> n >> q;
-
-    vector<int> a(n);
-    for (auto &x : a)
-        cin >> x;
-
-    multiset<int> hi, lo;
-    int sum_hi = 0, sum_lo = 0;
-    vector<int> final;
-    for (int i = 0; i < n; ++i)
+    unordered_map<char,int>mp;
+    string dict;
+    cin>>dict;
+    string matcher;
+    cin>>matcher;
+    for(int i=0;i<dict.size();i++)
     {
-        if (i & 1)
-        {
-            if (a[i] > *hi.begin())
-            {
-                sum_hi += a[i] - *hi.begin();
-                sum_lo += *hi.begin();
-                lo.insert(*hi.begin());
-                hi.insert(a[i]);
-                hi.erase(hi.begin());
-            }
-            else
-            {
-                lo.insert(a[i]);
-                sum_lo += a[i];
-            }
-        }
-        else
-        {
-            if (lo.empty())
-            {
-                hi.insert(a[i]);
-                sum_hi += a[i];
-            }
-            else if (a[i] < *lo.rbegin())
-            {
-                sum_hi += *lo.rbegin();
-                sum_lo += a[i] - *lo.rbegin();
-                hi.insert(*lo.rbegin());
-                lo.insert(a[i]);
-                lo.erase(lo.find(*lo.rbegin()));
-            }
-            else
-            {
-                hi.insert(a[i]);
-                sum_hi += a[i];
-            }
-        }
-        final.push_back(sum_hi - sum_lo);
+        mp[dict[i]]=i+1;
     }
-    for (int i = 0; i < q; i++)
+    ll ans=0;
+    for(int i=0;i<matcher.size()-1;i++)
     {
-        int x;
-        cin >> x;
-        cout << final[x - 1] << " ";
+        int val1=mp[matcher[i]];
+        int val2=0;
+        if(i+1<matcher.size())
+        val2=mp[matcher[i+1]];
+        ans+=abs(val1-val2);
+        // cout << "val1" <<" " <<  val1 << " " << "val2"  << " " << val2 << endl;
     }
-    cout << endl;
+    cout << ans << endl;
 }
 
 int32_t main()
 {
     fastio();
 
-    int t;
+    int t ;
     cin >> t;
     while (t--)
         solve();

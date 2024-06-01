@@ -68,72 +68,47 @@ ll expo(ll a, ll b, ll mod)
 
 void solve()
 {
-    ll n, q;
-    cin >> n >> q;
-
-    vector<int> a(n);
-    for (auto &x : a)
-        cin >> x;
-
-    multiset<int> hi, lo;
-    int sum_hi = 0, sum_lo = 0;
-    vector<int> final;
-    for (int i = 0; i < n; ++i)
-    {
-        if (i & 1)
-        {
-            if (a[i] > *hi.begin())
-            {
-                sum_hi += a[i] - *hi.begin();
-                sum_lo += *hi.begin();
-                lo.insert(*hi.begin());
-                hi.insert(a[i]);
-                hi.erase(hi.begin());
-            }
-            else
-            {
-                lo.insert(a[i]);
-                sum_lo += a[i];
-            }
-        }
-        else
-        {
-            if (lo.empty())
-            {
-                hi.insert(a[i]);
-                sum_hi += a[i];
-            }
-            else if (a[i] < *lo.rbegin())
-            {
-                sum_hi += *lo.rbegin();
-                sum_lo += a[i] - *lo.rbegin();
-                hi.insert(*lo.rbegin());
-                lo.insert(a[i]);
-                lo.erase(lo.find(*lo.rbegin()));
-            }
-            else
-            {
-                hi.insert(a[i]);
-                sum_hi += a[i];
-            }
-        }
-        final.push_back(sum_hi - sum_lo);
-    }
-    for (int i = 0; i < q; i++)
-    {
-        int x;
-        cin >> x;
-        cout << final[x - 1] << " ";
-    }
-    cout << endl;
+   int n,x,y,z;
+   cin>>n>>x>>y>>z;
+   vector<pair<int,int>>math,english,sum;
+   for(int i=0;i<n;i++)
+   {
+    int x;
+    cin>>x;
+    pair<int,int>p={i+1,x};
+    // cout << p.first << p.se
+    math.push_back(p);
+   }
+   for (int i = 0; i < n; i++)
+   {
+       int x;
+       cin >> x;
+       pair<int, int> p = {i + 1, x};
+       english.push_back(p);
+   }
+   for (int i = 0; i < n; i++)
+   {
+       sum.push_back({i+1,math[i].second+english[i].second});
+   }
+   std::sort(math.begin(), math.end(), [](const std::pair<int, int> &left, const std::pair<int, int> &right)
+             { return left.second < right.second; });
+   sort(english.begin(),english.end());
+   sort(sum.begin(),sum.end());
+   for(int i=0;i<math.size();i++)
+   cout<< math[i].first << " " << math[i].second << endl;
+   while(x--)
+   {
+    cout << math.back().second << endl;
+    math.pop_back();
+   }
 }
 
 int32_t main()
 {
     fastio();
 
-    int t;
-    cin >> t;
+    int t = 1;
+    // cin >> t;
     while (t--)
         solve();
 }

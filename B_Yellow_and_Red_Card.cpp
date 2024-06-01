@@ -68,72 +68,38 @@ ll expo(ll a, ll b, ll mod)
 
 void solve()
 {
-    ll n, q;
-    cin >> n >> q;
+   int n,q;
+   cin>>n>>q;
+   vector<int>mapper(n+1,0);
+   while(q--)
+   {
+     int action,player;
+     cin>>action>>player;
+     if(action==1)
+     {
+        mapper[player]++;
 
-    vector<int> a(n);
-    for (auto &x : a)
-        cin >> x;
-
-    multiset<int> hi, lo;
-    int sum_hi = 0, sum_lo = 0;
-    vector<int> final;
-    for (int i = 0; i < n; ++i)
-    {
-        if (i & 1)
-        {
-            if (a[i] > *hi.begin())
-            {
-                sum_hi += a[i] - *hi.begin();
-                sum_lo += *hi.begin();
-                lo.insert(*hi.begin());
-                hi.insert(a[i]);
-                hi.erase(hi.begin());
-            }
-            else
-            {
-                lo.insert(a[i]);
-                sum_lo += a[i];
-            }
-        }
+     }
+     else if(action==2)
+     {
+        mapper[player]=-1;
+     }
+     else{
+        //print
+        if(mapper[player]>=2 || mapper[player]==-1)
+        cout << "Yes" << endl;
         else
-        {
-            if (lo.empty())
-            {
-                hi.insert(a[i]);
-                sum_hi += a[i];
-            }
-            else if (a[i] < *lo.rbegin())
-            {
-                sum_hi += *lo.rbegin();
-                sum_lo += a[i] - *lo.rbegin();
-                hi.insert(*lo.rbegin());
-                lo.insert(a[i]);
-                lo.erase(lo.find(*lo.rbegin()));
-            }
-            else
-            {
-                hi.insert(a[i]);
-                sum_hi += a[i];
-            }
-        }
-        final.push_back(sum_hi - sum_lo);
-    }
-    for (int i = 0; i < q; i++)
-    {
-        int x;
-        cin >> x;
-        cout << final[x - 1] << " ";
-    }
-    cout << endl;
+        cout << "No" << endl;
+     }
+   }
 }
 
 int32_t main()
 {
     fastio();
 
-    int t;
-    cin >> t;
+    int t = 1;
+    // cin >> t;
     while (t--)
         solve();
 }
