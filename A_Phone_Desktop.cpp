@@ -1,33 +1,32 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long
-int calculateScreens(int x, int y)
-{
-    //total rows and cols
-    const int rows = 5;
-    const int cols = 3;
 
-    const int c = rows * cols;
-    const int cells = 4;
-
-    int maxi = (rows / 2) * (cols / 2);
-
-    int s = (y + maxi - 1) / maxi;
-
-    int u = y * cells;
-
-    int re = s * c - u;
-
-    int r = x - re;
-    int s1 = (r > 0) ? (r + c - 1) / c : 0;
-
-    return s + s1;
-}
 void solve()
 {
     ll num1, num2;
     cin >> num1 >> num2;
-    cout << calculateScreens(num1, num2) << endl;
+   ll ans=0;
+   while(num1>0 || num2>0)
+   {
+    if(num2>=2)
+    {
+        num1-=7;
+        num2-=2;
+        ans++;
+    }
+    else if(num2==1)
+    {
+        num1-=11;
+        num2-=1;
+        ans++;
+    }
+    else {
+        num1-=15;
+        ans++;
+    }
+   }
+   cout << ans << endl;
 }
 int main()
 {

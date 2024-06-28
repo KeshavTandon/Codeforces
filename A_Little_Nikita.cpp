@@ -5,14 +5,9 @@ void solve()
 {
     ll n, m;
     cin >> n >> m;
-    if(n<m)
-    {
-        cout << "No" << endl;
-        return;
-    }
-    else{
-        cout << "Yes" << endl;
-    }
+   if(n>=m && ((n%2)==(m%2)))
+   cout << "Yes" << endl;
+   else cout << "No" << endl;
 }
 int main()
 {
